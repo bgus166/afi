@@ -1,0 +1,104 @@
+.micro { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--font-technical); font-size: .5625rem; letter-spacing: .07em; text-transform: uppercase; line-height: 1.7; color: var(--muted); }
+.note { font-size: .625rem; line-height: 1.7; color: var(--muted); }
+.deck { padding: 1.5rem; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); box-shadow: 0 20px 65px #172a6609; }
+.deckTop { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+.deckTop > span:first-child { color: var(--accent); }
+.deckProduct { display: flex; align-items: center; gap: 1rem; margin-block: 1.5rem; }
+.productMark { display: grid; place-items: center; width: 52px; height: 62px; border: 1px solid #1e3a8a1c; border-radius: 6px; background: var(--accent-soft); color: var(--accent); flex-shrink: 0; }
+.deckProduct strong { display: block; margin-top: .25rem; font-size: .875rem; font-weight: 500; }
+.deckProduct div > span:last-child { display: block; margin-top: .3rem; color: var(--muted); font-size: .625rem; }
+.deckCards { display: grid; gap: .65rem; min-height: 285px; }
+.deckCards > div { position: relative; padding: 1rem 2.25rem 1rem 1rem; border: 1px solid var(--border); border-radius: 6px; background: var(--background); animation: card-in .5s both; }
+.deckCards > div:first-child { background: var(--accent-soft); border-color: #1e3a8a1c; }
+.deckCards > div:nth-child(2) { margin-inline: .5rem; }
+.deckCards > div:nth-child(3) { margin-inline: 1rem; }
+.deckCards p { margin-top: .4rem; font-size: .8125rem; line-height: 1.6; }
+.deckCards svg { position: absolute; top: 1rem; right: .75rem; color: var(--accent); }
+.deckControls { display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; }
+.deckControls > button { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; color: var(--accent); cursor: pointer; transition: background .25s; }
+.deckControls > button:hover { background: var(--accent-soft); }
+.deckControls > div { display: flex; gap: .125rem; }
+.deckControls > div > button { position: relative; width: 30px; height: 30px; cursor: pointer; }
+.deckControls > div > button::after { content: ""; display: block; width: 5px; height: 5px; margin: auto; border-radius: 50%; background: var(--border); transition: background .2s, transform .2s; }
+.deckControls > div > button[aria-pressed="true"]::after { background: var(--accent); transform: scale(1.4); }
+.deck > .note { text-align: center; margin-top: .5rem; }
+.studio { display: grid; grid-template-columns: .8fr 1.6fr; margin-top: 3rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--background); }
+.studioInputs { min-width: 0; padding: 2rem; border-right: 1px solid var(--border); background: var(--surface-soft); }
+.studioInputs h3 { margin-top: 1rem; font-family: var(--font-heading); font-size: 1.75rem; font-weight: 400; line-height: 1.15; letter-spacing: -.035em; }
+.studioInputs label { display: block; margin-top: 1.5rem; margin-bottom: .5rem; font-size: .6875rem; }
+.studioInputs select { width: 100%; min-height: 44px; padding: .75rem .5rem; border: 1px solid var(--border); border-radius: 4px; background: var(--background); color: var(--text); font-size: .75rem; }
+.productFacts { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.productFacts > p { margin-top: .5rem; font-size: .6875rem; line-height: 1.8; }
+.productFacts > span:last-child { display: block; margin-top: .5rem; color: var(--muted); font-size: .625rem; }
+.generate { display: flex; align-items: center; justify-content: center; gap: .65rem; width: 100%; min-height: 44px; padding: .75rem .5rem; margin-top: 1.5rem; border-radius: 5px; background: var(--accent); color: white; font-family: var(--font-technical); font-size: .5625rem; text-transform: uppercase; letter-spacing: .04em; cursor: pointer; transition: background .2s; }
+.generate:hover { background: var(--accent-hover); }
+.generate:disabled { opacity: .65; cursor: wait; }
+.studioInputs > .note { margin-top: .75rem; }
+.studioOutput { min-width: 0; padding: 2rem; }
+.outputHeader { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.copyButton { display: inline-flex; align-items: center; gap: .5rem; min-height: 40px; padding: .5rem .75rem; border: 1px solid var(--border); border-radius: 4px; color: var(--accent); font-size: .6875rem; cursor: pointer; }
+.copyButton:hover { background: var(--accent-soft); }
+.copyButton:disabled { opacity: .5; cursor: wait; }
+.formatTabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; border-bottom: 1px solid var(--border); }
+.formatTabs button { min-height: 44px; padding: .75rem .875rem; border-bottom: 2px solid transparent; font-family: var(--font-technical); font-size: .5625rem; color: var(--muted); cursor: pointer; transition: border-color .25s, color .25s; }
+.formatTabs button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.outputRows { display: grid; align-content: start; min-height: 370px; gap: .75rem; padding-top: 1.5rem; }
+.outputRows article { position: relative; display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; animation: card-in .4s both; }
+.outputRows article p { flex: 1; font-size: .875rem; line-height: 1.8; white-space: pre-line; }
+.outputNumber { margin-top: .2rem; font-family: var(--font-technical); font-size: .625rem; color: var(--muted); }
+.outputCheck { margin-top: .25rem; flex-shrink: 0; color: var(--accent); }
+.generating article { opacity: .45; }
+.generating article::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, #e9edff, transparent); animation: shimmer 1s linear infinite; }
+.outputFooter { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .625rem; }
+.outputFooter > span:first-child { display: flex; align-items: center; gap: .5rem; color: var(--accent); }
+.copyNotice { min-height: 32px; margin-top: .75rem; font-size: .625rem; color: var(--accent); line-height: 1.6; }
+.calendar { margin-top: 3rem; padding: 2rem; border: 1px solid var(--border); border-radius: 8px; background: var(--background); }
+.calendarHeading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.calendarDays { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .75rem; margin-top: 1.5rem; }
+.calendarDays button { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; min-height: 130px; padding: 1rem; gap: 1rem; border: 1px solid var(--border); border-radius: 5px; text-align: left; cursor: pointer; transition: background .25s, transform .25s, border-color .25s; }
+.calendarDays button > span:nth-child(2) { font-size: .8125rem; line-height: 1.5; }
+.calendarDays button > svg { align-self: flex-end; color: var(--muted); }
+.calendarDays button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.calendarDays button:hover { transform: translateY(-3px); }
+.calendarDetail { display: grid; grid-template-columns: 1fr 2fr; gap: 1rem 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); animation: card-in .4s both; }
+.calendarDetail > .micro { grid-column: 1; color: var(--accent); }
+.calendarDetail h3 { grid-column: 1; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 400; line-height: 1.15; letter-spacing: -.03em; }
+.calendarDetail p { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: .875rem; line-height: 1.8; color: var(--muted); }
+.spinning { animation: spin 1s linear infinite; }
+@keyframes card-in { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: none; } }
+@keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 1000px) {
+  .studio { grid-template-columns: 1fr 1.6fr; }
+  .studioInputs, .studioOutput { padding: 1.5rem; }
+}
+@media (max-width: 760px) {
+  .deck { padding: 1.25rem; }
+  .deckCards { min-height: 300px; }
+  .studio { grid-template-columns: 1fr; margin-top: 2rem; }
+  .studioInputs { border-right: 0; border-bottom: 1px solid var(--border); }
+  .studioInputs h3 br { display: none; }
+  .outputRows { min-height: 380px; }
+  .outputRows article { padding: 1rem; gap: .65rem; }
+  .outputRows article p { font-size: .8125rem; }
+  .outputCheck { display: none; }
+  .formatTabs { gap: 0; flex-wrap: nowrap; }
+  .formatTabs button { flex: 1; padding-inline: .375rem; font-size: .5rem; }
+  .calendar { padding: 1.5rem; margin-top: 2rem; }
+  .calendarDays { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .375rem; }
+  .calendarDays button { min-height: 80px; align-items: center; padding: .75rem .25rem; }
+  .calendarDays button > span:nth-child(2) { display: none; }
+  .calendarDays button > svg { align-self: center; }
+  .calendarDetail { display: block; }
+  .calendarDetail h3 { margin-top: .75rem; }
+  .calendarDetail p { margin-top: 1rem; }
+}
+@media (max-width: 360px) {
+  .studioInputs, .studioOutput, .calendar { padding: 1.25rem; }
+  .calendar { padding: 1rem; }
+  .calendarDays { gap: .25rem; }
+  .deckTop > .micro { font-size: .5rem; }
+  .deckProduct { gap: .65rem; }
+  .deckProduct strong { font-size: .8125rem; }
+  .deckCards p { font-size: .75rem; }
+}

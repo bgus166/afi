@@ -1,0 +1,223 @@
+/* Footer: informasi di atas, wordmark TechText lebar dan terpotong di bawah. */
+
+.footer {
+  --footer-bg: #111312; /* = --text, sisi gelap dari palet kita */
+  --footer-fg: rgba(252, 252, 250, 0.62);
+  --footer-strong: rgba(252, 252, 250, 0.95);
+  --footer-line: rgba(252, 252, 250, 0.1);
+  --footer-dot: rgba(252, 252, 250, 0.26);
+
+  position: relative;
+  z-index: 10;
+  /* Keep the last footer row above the persistent 72px chat dock. */
+  padding-bottom: calc(116px + env(safe-area-inset-bottom, 0px));
+  background: var(--footer-bg);
+  color: var(--footer-fg);
+}
+
+.inner {
+  max-width: 84rem;
+  margin-inline: auto;
+  padding: 72px 40px 0;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 56px;
+  padding-bottom: 56px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 23rem;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--footer-strong);
+  text-decoration: none;
+}
+
+.tagline {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: var(--footer-strong);
+}
+
+.address {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact a {
+  width: fit-content;
+  color: var(--footer-strong);
+  font-size: 13px;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.contact a:hover {
+  border-bottom-color: var(--footer-line);
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.socials a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--footer-line);
+  border-radius: 8px;
+  color: var(--footer-fg);
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.socials a:hover {
+  color: var(--footer-strong);
+  border-color: rgba(252, 252, 250, 0.3);
+}
+.socials svg {
+  width: 16px;
+  height: 16px;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.colTitle {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  /* 0.45 terukur 4,44 — tepat di bawah ambang AA 4,5 untuk teks 10px. */
+  color: rgba(252, 252, 250, 0.52);
+}
+
+.col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.col a {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--footer-fg);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.col a:hover {
+  color: var(--footer-strong);
+}
+
+/* TechText mengisi 90% lebar canvas. Wadah 92% menghasilkan wordmark
+   sekitar 83% lebar footer, mengikuti frame Figma 1710 px.
+   Canvas lebih tinggi agar auto-fit tidak membatasi besar hurufnya. */
+
+.wordmark {
+  position: relative;
+  max-width: 106.875rem;
+  margin-inline: auto;
+}
+
+.art {
+  position: relative;
+  width: 92%;
+  aspect-ratio: 4.8;
+  margin-inline: auto;
+  overflow: hidden;
+  font-family: var(--font-heading);
+}
+
+.art :global(.tech-text) {
+  position: absolute;
+  top: -20%;
+  height: 160%;
+}
+
+/* ── Baris bawah ─────────────────────────────────────────────── */
+
+.bottom {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 84rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 40px 28px;
+  font-family: var(--font-technical);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(252, 252, 250, 0.5);
+}
+
+@media (max-width: 1023px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
+  }
+  .nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .inner {
+    padding: 52px 24px 0;
+  }
+  .tagline {
+    font-size: 19px;
+  }
+  .bottom {
+    position: relative;
+    left: auto;
+    transform: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 20px 24px 28px;
+  }
+}

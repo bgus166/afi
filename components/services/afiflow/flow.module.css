@@ -1,0 +1,130 @@
+.micro { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--font-technical); font-size: .5625rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); line-height: 1.7; }
+.workflowDemo { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; background: var(--background); overflow: hidden; }
+.compact { margin-top: 0; padding: 1.25rem; background: var(--surface); box-shadow: 0 20px 65px #172a6609; }
+.demoHeader { display: flex; justify-content: space-between; align-items: center; gap: .5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+.demoHeader > .micro { color: var(--accent); }
+.demoHeader button { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: var(--muted); cursor: pointer; transition: transform .3s, background .3s; }
+.demoHeader button:hover { transform: rotate(-45deg); background: var(--accent-soft); }
+.workflowChoices { display: flex; flex-wrap: wrap; gap: .5rem; padding-block: 1.25rem; }
+.workflowChoices button { min-height: 40px; padding: .65rem .875rem; border: 1px solid var(--border); border-radius: 4px; color: var(--muted); font-family: var(--font-technical); font-size: .5625rem; line-height: 1.6; text-align: left; cursor: pointer; transition: border-color .25s, color .25s, background .25s; }
+.workflowChoices button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.compact .workflowChoices { display: grid; grid-template-columns: 1fr 1fr; }
+.compact .workflowChoices button { text-align: center; }
+.trigger { display: flex; align-items: center; gap: .5rem; padding: .75rem; border: 1px dashed var(--border); border-radius: 4px; font-family: var(--font-technical); font-size: .5625rem; color: var(--muted); }
+.trigger svg { flex-shrink: 0; color: var(--accent); }
+.triggerDot { width: 5px; height: 5px; margin-left: auto; border-radius: 50%; flex-shrink: 0; background: #437d5e; }
+.workflowDescription { max-width: 52rem; margin-bottom: 1.25rem; font-size: .875rem; line-height: 1.8; color: var(--muted); }
+.nodes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 2.5rem; }
+.nodeSlot { position: relative; min-width: 0; }
+.node { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 142px; padding: .5rem; cursor: pointer; text-align: center; }
+.nodeIcon { position: relative; display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 50%; color: var(--muted); background: var(--background); transition: transform .3s, background .3s, border-color .3s; }
+.node[aria-pressed="true"] .nodeIcon { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); transform: translateY(-3px); }
+.node[data-state="running"] .nodeIcon { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 5px #1e3a8a0c; animation: node-pulse 1s ease-in-out infinite; }
+.node[data-state="done"] .nodeIcon { border-color: var(--accent); color: var(--accent); }
+.node[data-state="error"] .nodeIcon { border-color: #a54536; color: #a54536; background: #fff0ec; }
+.node strong { display: block; font-size: .8125rem; font-weight: 500; line-height: 1.5; }
+.node > span:last-child { margin-top: .4rem; font-family: var(--font-technical); font-size: .5rem; line-height: 1.6; color: var(--muted); }
+.nodeCheck { position: absolute; right: -2px; bottom: 0; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--background); background: var(--accent); color: white; }
+.nodeConnector { position: absolute; z-index: 0; top: 40px; left: calc(50% + 32px); width: calc(100% - 64px); height: 1px; background: var(--border); overflow: hidden; }
+.nodeConnector[data-done="true"] { background: var(--accent); }
+.nodeConnector i { display: none; height: 100%; width: 50%; background: var(--accent); }
+.nodeConnector[data-running="true"] i { display: block; animation: packet 1s linear infinite; }
+.nodeDetail { min-height: 100px; padding: 1rem 1.25rem; border-radius: 5px; border: 1px solid var(--border); background: var(--surface-soft); animation: detail-in .35s both; }
+.nodeDetail .micro { color: var(--accent); }
+.nodeDetail p { margin-top: .4rem; color: var(--muted); font-size: .8125rem; line-height: 1.7; }
+.compact .nodes { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 1.75rem; }
+.compact .node { min-height: 120px; }
+.compact .nodeIcon { width: 44px; height: 44px; margin-bottom: .5rem; }
+.compact .node strong { font-size: .6875rem; }
+.compact .node > span:last-child { font-size: .4375rem; }
+.compact .nodeConnector { top: 30px; left: calc(50% + 24px); width: calc(100% - 48px); }
+.compact .nodeSlot:nth-child(2) .nodeConnector { display: block; }
+.compact .nodeDetail { min-height: 108px; padding: .875rem; }
+.compact .nodeDetail p { font-size: .6875rem; }
+.executionLog { margin-top: 1.25rem; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 5px; }
+.executionLog ol { margin-top: .75rem; }
+.executionLog li { display: flex; align-items: center; gap: .75rem; padding-block: .5rem; color: var(--muted); font-family: var(--font-technical); font-size: .5625rem; line-height: 1.6; }
+.executionLog li > svg { flex-shrink: 0; }
+.executionLog li > span:last-child { margin-left: auto; text-align: right; }
+.executionLog li[data-state="done"] svg { color: var(--accent); }
+.executionLog li[data-state="error"] { color: #a54536; }
+.runBar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.25rem; }
+.runButton { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 44px; min-width: 180px; padding: .75rem 1rem; border-radius: 5px; background: var(--accent); color: white; font-family: var(--font-technical); font-size: .5625rem; text-transform: uppercase; letter-spacing: .05em; cursor: pointer; }
+.runButton:hover { background: var(--accent-hover); }
+.runButton:disabled { opacity: .65; cursor: wait; }
+.errorButton { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; font-family: var(--font-technical); font-size: .5625rem; color: var(--muted); cursor: pointer; }
+.errorButton:disabled { opacity: .4; cursor: wait; }
+.errorButton:hover { color: #a54536; }
+.runStatus { display: flex; align-items: center; gap: .5rem; min-height: 42px; font-size: .625rem; color: var(--muted); line-height: 1.6; }
+.runStatus[data-error="true"] { color: #a54536; }
+.runStatus > svg { flex-shrink: 0; }
+.runningDot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; background: var(--accent); animation: node-pulse 1s infinite; }
+.demoFooter { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; padding-top: .75rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .5625rem; line-height: 1.6; }
+.demoFooter > span:first-child { display: flex; align-items: center; gap: .5rem; color: var(--accent); }
+.taskAudit { display: grid; grid-template-columns: 1.4fr 1fr; gap: 5rem; margin-top: 3rem; }
+.taskList label { position: relative; display: flex; align-items: center; gap: 1rem; padding-block: 1.125rem; border-top: 1px solid var(--border); cursor: pointer; }
+.taskList label:last-child { border-bottom: 1px solid var(--border); }
+.taskList input { position: absolute; width: 20px; height: 20px; opacity: 0; }
+.taskCheck { display: grid; place-items: center; width: 20px; height: 20px; flex-shrink: 0; border: 1px solid var(--border); border-radius: 4px; color: transparent; transition: background .25s, color .25s; }
+.taskList input:checked + .taskCheck { background: var(--accent); border-color: var(--accent); color: white; }
+.taskList input:focus-visible + .taskCheck { outline: 2px solid var(--accent); outline-offset: 4px; }
+.taskList label > span:last-child { font-size: .875rem; line-height: 1.7; color: var(--muted); }
+.taskList input:checked ~ span:last-child { color: var(--text); }
+.taskSummary { position: sticky; top: 7rem; align-self: start; padding: 2rem; border: 1px solid #1e3a8a18; border-radius: 6px; background: var(--accent-soft); }
+.taskCount { margin-top: 1.5rem; font-family: var(--font-heading); font-size: 5rem; line-height: 1; letter-spacing: -.06em; color: var(--accent); }
+.taskCount > span { margin-left: .5rem; font-size: 1rem; color: var(--muted); letter-spacing: -.02em; }
+.taskSummary h3 { margin-top: 1.5rem; font-family: var(--font-heading); font-size: 1.375rem; line-height: 1.2; font-weight: 400; letter-spacing: -.03em; }
+.taskSummary > p:last-of-type { margin-top: 1rem; color: var(--muted); font-size: .8125rem; line-height: 1.8; }
+.taskSummary a { display: flex; align-items: center; gap: .75rem; min-height: 44px; margin-top: 1rem; color: var(--accent); font-family: var(--font-technical); font-size: .5625rem; text-transform: uppercase; letter-spacing: .03em; }
+.calculator { display: grid; grid-template-columns: 1fr 1fr; margin-top: 3rem; border: 1px solid #1e3a8a20; border-radius: 8px; background: var(--background); overflow: hidden; }
+.calculatorInputs { padding: 2.5rem; border-right: 1px solid var(--border); }
+.calculatorInputs h3 { margin-top: 1rem; font-family: var(--font-heading); font-size: 1.75rem; line-height: 1.15; letter-spacing: -.035em; font-weight: 400; }
+.rangeField { margin-top: 2rem; }
+.rangeField label { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); }
+.rangeField strong { font-weight: 500; color: var(--accent); }
+.rangeField input { width: 100%; height: 32px; margin-top: .75rem; accent-color: var(--accent); cursor: pointer; }
+.rangeField > div { display: flex; justify-content: space-between; color: var(--muted); font-family: var(--font-technical); font-size: .5rem; }
+.calculatorResult { display: flex; flex-direction: column; justify-content: center; padding: 2.5rem; }
+.hours { margin-top: 2rem; font-family: var(--font-heading); font-size: 5rem; line-height: 1; letter-spacing: -.06em; color: var(--accent); }
+.hours > span { display: block; margin-top: .75rem; font-family: var(--font-technical); font-size: .6875rem; text-transform: uppercase; letter-spacing: .05em; }
+.hoursRule { height: 3px; background: var(--accent-soft); margin-block: 1.75rem; }
+.hoursRule > span { display: block; width: 100%; height: 100%; background: var(--accent); transform-origin: left; transition: transform .3s; }
+.monthly { font-family: var(--font-heading); font-size: 1.75rem; color: var(--accent); letter-spacing: -.04em; }
+.monthly > span { font-family: var(--font-technical); font-size: .625rem; color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }
+.formula { margin-top: 1rem; color: var(--muted); font-size: .6875rem; line-height: 1.8; }
+.calculatorNote { margin-top: 1rem; color: var(--muted); font-size: .625rem; line-height: 1.8; }
+@keyframes node-pulse { 0%, 100% { opacity: .6; } 50% { opacity: 1; } }
+@keyframes packet { from { transform: translateX(-100%); } to { transform: translateX(200%); } }
+@keyframes detail-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+@media (max-width: 1050px) {
+  .taskAudit { gap: 3rem; }
+  .taskSummary { padding: 1.5rem; }
+  .calculatorInputs, .calculatorResult { padding: 2rem; }
+}
+@media (max-width: 760px) {
+  .workflowDemo { margin-top: 2rem; padding: 1.25rem; }
+  .compact { margin-top: 0; }
+  .workflowChoices { display: grid; grid-template-columns: 1fr 1fr; }
+  .workflowChoices button { font-size: .5rem; padding: .65rem; }
+  .nodes { grid-template-columns: 1fr 1fr; row-gap: 1.5rem; padding-block: 1.75rem; }
+  .node { min-height: 135px; }
+  .nodeIcon { width: 52px; height: 52px; margin-bottom: .75rem; }
+  .node strong { font-size: .75rem; }
+  .nodeConnector { top: 34px; left: calc(50% + 26px); width: calc(100% - 52px); }
+  .nodeSlot:nth-child(2) .nodeConnector { display: none; }
+  .compact .nodes { grid-template-columns: 1fr 1fr; row-gap: 1rem; padding-block: 1.5rem; }
+  .compact .nodeSlot:nth-child(2) .nodeConnector { display: none; }
+  .nodeDetail { min-height: 135px; padding: 1rem; }
+  .compact .nodeDetail { min-height: 115px; }
+  .executionLog { padding: 1rem; }
+  .executionLog li { gap: .5rem; font-size: .5rem; }
+  .executionLog li > span:first-child { display: none; }
+  .executionLog li > span:last-child { max-width: 40%; }
+  .taskAudit { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
+  .taskSummary { position: static; }
+  .taskList label > span:last-child { font-size: .8125rem; }
+  .calculator { grid-template-columns: 1fr; margin-top: 2rem; }
+  .calculatorInputs, .calculatorResult { padding: 1.5rem; }
+  .calculatorInputs { border-right: 0; border-bottom: 1px solid var(--border); }
+  .hours { font-size: 4rem; }
+}

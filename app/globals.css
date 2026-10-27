@@ -1,26 +1,508 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Design tokens — diambil dari analisis situs referensi.
+   Tema paper terang; belum ada dark mode (lihat docs/PLAN.md).
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warna inti */
+  --background: #fcfcfa;
+  --text: #111312;
+  --muted: #687170;
+  --accent: #1e3a8a;
+  --accent-hover: #172a66;
+  --accent-soft: #e9edff;
+
+  /* Permukaan */
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-strong: #ffffff;
+  --surface-soft: #f5f7fb;
+  --border: rgba(17, 19, 18, 0.12);
+
+  /* Skala tipografi — fluid, tanpa lompatan breakpoint */
+  --type-display: clamp(2.25rem, 4.2vw, 4rem);
+  --type-page-title: clamp(2.25rem, 4vw, 3.5rem);
+  --type-section-title: clamp(2rem, 3.2vw, 3rem);
+  --type-card-title: clamp(1.625rem, 2.4vw, 2.125rem);
+  --type-compact-title: clamp(1.375rem, 1.8vw, 1.625rem);
+  --type-lead: clamp(1.125rem, 1.5vw, 1.25rem);
+  --type-body: 1rem;
+  --type-small: 0.875rem;
+  --type-label: 0.75rem;
+
+  /* Section label ("01 / SOLUTIONS") */
+  --section-label-size: 0.6875rem;
+  --section-label-tracking: 0.16em;
+
+  /* Font juga dideklarasikan di :root, BUKAN hanya di @theme inline.
+     `@theme inline` disubstitusi Tailwind saat build ke dalam utility-nya dan
+     TIDAK memancarkan custom property saat runtime — akibatnya setiap
+     `var(--font-heading)` di CSS biasa maupun di kelas arbitrary
+     `font-[family-name:var(--font-heading)]` resolve ke kosong, dan seluruh
+     situs diam-diam jatuh ke font sistem. */
+  --font-body: var(--font-onest), system-ui, sans-serif;
+  --font-heading: var(--font-syne), var(--font-onest), system-ui, sans-serif;
+  --font-technical: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-surface-soft: var(--surface-soft);
+  --color-border: var(--border);
+
+  --font-body: var(--font-onest), system-ui, sans-serif;
+  --font-heading: var(--font-syne), var(--font-onest), system-ui, sans-serif;
+  --font-technical: var(--font-plex-mono), ui-monospace, monospace;
+
+  --shadow-scene: 0 24px 80px rgba(15, 23, 42, 0.08);
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Label section kecil bertracking lebar, dipakai di seluruh halaman */
+.section-label {
+  font-family: var(--font-technical);
+  font-size: var(--section-label-size);
+  letter-spacing: var(--section-label-tracking);
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 42%, transparent);
+}
+
+/* Aksesibilitas: matikan seluruh gerak bila pengguna memintanya.
+   Komponen motion juga mengecek ini lewat useReducedMotion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Reduced motion uses the natural dashboard and service-card flow. */
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-track] {
+    height: auto !important;
+  }
+}
+
+/* ============================================================
+   Marquee logo brand — murni CSS, tanpa JavaScript.
+   Dua salinan daftar digulir sejauh -50%, sehingga titik sambungnya
+   jatuh tepat saat salinan kedua menempati posisi awal salinan pertama.
+   ============================================================ */
+.marquee {
+  overflow: hidden;
+  /* Tepi kiri & kanan memudar, jadi logo tidak terpotong mendadak */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+}
+
+.marquee__inner {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+
+/* Berhenti saat disentuh kursor, supaya nama brand bisa dibaca */
+.marquee:hover .marquee__inner {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    /* Persentase pada translate mengacu ke lebar elemen itu sendiri,
+       jadi -100%/COPIES sama persis dengan lebar satu salinan. */
+    transform: translate3d(calc(-100% / var(--marquee-copies, 2)), 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .marquee__inner {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+  }
+  /* Tanpa guliran, salinan kedua cuma duplikat visual */
+  .marquee__dup {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Reveal saat elemen masuk viewport — CSS scroll-driven animation,
+   tanpa JavaScript dan tanpa IntersectionObserver.
+
+   Sengaja dibungkus @supports: di browser yang belum mendukung
+   animation-timeline, elemen tampil normal apa adanya. Tidak ada
+   state "opacity: 0" yang tertinggal kalau fitur ini tak tersedia —
+   konten tidak pernah bisa hilang karena alasan teknis.
+   ============================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      /* --reveal-offset menggeser titik mulai tiap elemen, menghasilkan
+         efek bertingkat tanpa animation-delay (yang diabaikan oleh
+         timeline berbasis scroll). */
+      animation-range: entry calc(0% + var(--reveal-offset, 0%)) entry
+        calc(55% + var(--reveal-offset, 0%));
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Animasi untuk mock UI produk di section Solutions.
+   Semuanya CSS — tidak ada satu pun yang butuh JavaScript.
+
+   Aturan prefers-reduced-motion global di atas sudah memaksa
+   animation-iteration-count: 1 dan durasi ~0, jadi animasi
+   berulang di bawah ini otomatis berhenti bagi yang memintanya.
+   ============================================================ */
+
+/* Garis penghubung putus-putus yang "berjalan" — dipakai di AfiFlow */
+@keyframes dash-march {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+.anim-dash {
+  stroke-dasharray: 4 4;
+  animation: dash-march 0.6s linear infinite;
+}
+
+/* Titik "sedang mengetik" di AfiAssist */
+@keyframes typing-dot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+.anim-typing > span {
+  animation: typing-dot 1.2s ease-in-out infinite;
+}
+.anim-typing > span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.anim-typing > span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Sapuan shimmer pada baris yang sedang digenerate — AfiCreator */
+@keyframes shimmer-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+.anim-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent
+  );
+  animation: shimmer-sweep 1.9s ease-in-out infinite;
+}
+
+/* Titik status "live" yang berdenyut — AfiInsight */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+.anim-pulse {
+  animation: live-pulse 1.8s ease-in-out infinite;
+}
+
+/* Batang grafik tumbuh dari bawah saat panel masuk viewport */
+@keyframes bar-grow {
+  from {
+    transform: scaleY(0.15);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .anim-bar {
+      transform-origin: bottom;
+      animation: bar-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 70%;
+    }
+  }
+}
+
+/* Rail timeline pada section Process: garis aksen memanjang dari kiri ke kanan
+   seiring section masuk viewport. Tanpa dukungan scroll timeline, garis ini
+   tampil penuh — tetap terbaca sebagai timeline, hanya tidak beranimasi. */
+@keyframes rail-extend {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Rail-nya setinggi 1px. Kalau timeline-nya diambil dari elemen itu
+       sendiri (`view()`), rentang `entry` ikut sekecil tingginya dan animasi
+       melompat 0 ke 1 hampir seketika. Jadi timeline dideklarasikan di
+       wrapper yang tinggi, lalu dirujuk namanya dari rail. */
+    .rail-track {
+      view-timeline: --rail block;
+    }
+    .anim-rail {
+      animation: rail-extend linear both;
+      animation-timeline: --rail;
+      /* Sengaja memakai `entry`, bukan `cover`. Rentang `cover` mengukur
+         seluruh perjalanan melintasi viewport — dan itu hanya bisa ditempuh
+         kalau masih ada konten di bawah section ini. Selama Process jadi
+         section terakhir, scroll mentok di ~27% cover dan garisnya tidak
+         pernah penuh. `entry` hanya bergantung pada section ini sendiri
+         masuk viewport, jadi selalu selesai apa pun yang ada di bawahnya. */
+      animation-range: entry 10% entry 95%;
+    }
+  }
+}
+
+/* Cincin gauge terisi seiring scroll. Elemennya SVG setinggi 168px, jadi
+   rentang `entry` miliknya sendiri sudah cukup panjang — tidak perlu
+   timeline bernama seperti rail di section Process. */
+@keyframes ring-fill {
+  from {
+    stroke-dashoffset: var(--ring-dash);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .anim-ring {
+      animation: ring-fill linear both;
+      animation-timeline: view();
+      animation-range: entry 15% entry 85%;
+    }
+    .anim-drop {
+      transform-origin: left;
+      animation: rail-extend linear both;
+      animation-timeline: view();
+      animation-range: entry 20% entry 80%;
+    }
+  }
+}
+
+/* ============================================================
+   Deck case study — port langsung dari komponen "Stack Scroll Reveal"
+   yang diberikan pemilik (/Users/bgst/stack-scroll-reveal).
+
+   Mekanismenya dipertahankan apa adanya; hanya warna, font, dan isi yang
+   disesuaikan. Nilai-nilai kunci dari sumber aslinya:
+     - kartu absolute inset:0  → semua bertumpuk di posisi sama
+     - transform-origin 50% 100% (tengah-bawah)
+     - z-index calc(count - index) → kartu pertama paling depan
+     - skala mundur .12 per tingkat kedalaman, offset turun 10px per tingkat
+   ============================================================ */
+.deck-track {
+  /* Didefinisikan di sini, bukan sebagai inline style di komponen: inline
+     style tidak bisa ditimpa media query, sehingga varian mobile-nya tidak
+     akan pernah berlaku. Nilainya mengikuti sumber aslinya. */
+  --deck-card-height: 500px;
+  --deck-stage-top: max(2rem, calc(50svh - 250px));
+  position: relative;
+  /* Kartu membesar (+exit*0.1) sehingga tepinya melewati lebar panggung —
+     terukur 376,1px pada viewport 375px. `clip` memotong sisi horizontalnya
+     tanpa mengganggu sumbu vertikal (kartu tetap bisa terbang ke atas) dan,
+     tidak seperti `hidden`, tidak membuat scroll container sehingga
+     position:sticky pada panggung tetap bekerja. */
+  overflow-x: clip;
+  /* 110svh scroll untuk tiap kartu, sesuai step = innerHeight * 1.1 di JS */
+  height: calc(var(--deck-card-height) + var(--deck-count) * 110svh);
+  margin-top: 2.75rem;
+}
+
+.deck-stage {
+  position: sticky;
+  top: var(--deck-stage-top);
+  height: var(--deck-card-height);
+  width: min(62.5rem, calc(100% - 5rem));
+  margin-inline: auto;
+  isolation: isolate;
+}
+
+.deck-card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 57.23% 42.77%;
+  height: var(--deck-card-height);
+  padding: 0.625rem 0.625rem 0.625rem 2.25rem;
+  border-radius: 1.5rem;
+  background: var(--deck-color);
+  color: #fff;
+  transform-origin: 50% 100%;
+  z-index: calc(var(--deck-count) - var(--deck-index));
+  will-change: transform;
+  backface-visibility: hidden;
+  /* State awal sebelum JS menyentuhnya — supaya tumpukan sudah benar
+     pada paint pertama dan tidak berkedip saat hidrasi. */
+  transform: translateY(calc(var(--deck-index) * 10px))
+    scale(calc(1 - var(--deck-index) * 0.12));
+}
+
+.deck-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-self: start;
+  padding: 2.25rem 3rem 0 0;
+}
+
+.deck-card-visual {
+  /* Kartu mewariskan color:#fff ke seluruh isinya. Panel ini berlatar terang,
+     jadi warnanya dikembalikan — tanpa ini teks di dalam visual (mis. "90
+     detik") jadi putih di atas putih dan hilang. */
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.875rem;
+  background: var(--background);
+  padding: 1.5rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .deck-stage {
+    width: calc(100% - 3rem);
+  }
+  .deck-card {
+    grid-template-columns: 56% 44%;
+    padding-left: 1.75rem;
+  }
+  .deck-card-body {
+    padding-right: 1.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .deck-track {
+    --deck-card-height: 620px;
+    --deck-stage-top: max(1rem, calc(50svh - 310px));
+  }
+  .deck-stage {
+    width: calc(100% - 2rem);
+  }
+  .deck-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1.375rem;
+    padding: 1.5rem 0.625rem 0.625rem;
+    border-radius: 1.25rem;
+  }
+  .deck-card-body {
+    padding: 0 0.875rem;
+    gap: 1.125rem;
+  }
+}
+
+/* Tanpa animasi: tumpukan dibongkar jadi daftar kartu biasa. */
+@media (prefers-reduced-motion: reduce) {
+  .deck-track {
+    height: auto;
+  }
+  .deck-stage {
+    position: relative;
+    top: auto;
+    height: auto;
+    display: grid;
+    gap: 1.5rem;
+  }
+  .deck-card {
+    position: relative;
+    inset: auto;
+    height: auto;
+    min-height: var(--deck-card-height);
+    transform: none !important;
+    visibility: visible !important;
+    will-change: auto;
+  }
+}
+
+/* Tanpa registrasi ini, --shake dianggap token teks dan animasinya meloncat
+   antar keyframe alih-alih menginterpolasi. Dipakai oleh kartu testimonial. */
+@property --shake {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }

@@ -1,0 +1,393 @@
+/*
+  Section ini sebelumnya berlatar gelap (charcoal + spotlight + kartu tembus
+  pandang). Itu tidak nyambung dengan tema situs, jadi seluruh lapisan
+  visualnya disusun ulang untuk terang.
+
+  Yang dipertahankan: seluruh layout, kemiringan kartu, pin, dan interaksi
+  ayunannya. Yang diganti: latar, bayangan, dan semua warna — kini diturunkan
+  dari token situs.
+
+  Latarnya memakai resep "kertas" yang sama dengan hero (garis hairline
+  vertikal di atas glow aksen, ditutup scrim dan noise), supaya section ini
+  terbaca satu keluarga dengan bagian atas halaman.
+*/
+
+.section {
+  position: relative;
+  z-index: 10;
+  isolation: isolate;
+  overflow: hidden;
+  scroll-margin-top: 4rem;
+  color: var(--text);
+  background: #fafafa;
+}
+
+/* Garis hairline vertikal di atas glow aksen — resep sama seperti hero. */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+  background:
+    radial-gradient(
+      68% 46% at 50% 22%,
+      #fafafa 0%,
+      rgba(250, 250, 250, 0.88) 30%,
+      rgba(250, 250, 250, 0.35) 52%,
+      transparent 72%
+    ),
+    radial-gradient(
+      70% 55% at 50% 62%,
+      rgba(82, 122, 218, 0.15),
+      transparent 72%
+    );
+  mask-image: repeating-linear-gradient(
+    90deg,
+    #000 0,
+    #000 1.92px,
+    transparent 1.92px,
+    transparent 14.4px
+  );
+  -webkit-mask-image: repeating-linear-gradient(
+    90deg,
+    #000 0,
+    #000 1.92px,
+    transparent 1.92px,
+    transparent 14.4px
+  );
+}
+
+/* Noise halus; di latar terang dipakai multiply, bukan ditumpuk putih. */
+.section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' opacity='.5' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+
+.scene {
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
+  min-height: 800px;
+  margin-inline: auto;
+  padding: 48px 48px 52px;
+}
+
+/* Pengganti kerucut spotlight: sapuan aksen lembut dari atas. */
+.scene::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  left: 30%;
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    rgba(30, 58, 138, 0.09),
+    rgba(30, 58, 138, 0.03) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.label,
+.annotation,
+.number,
+.role,
+.crosses {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+.label {
+  position: relative;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.headline {
+  position: absolute;
+  top: 135px;
+  left: 50%;
+  translate: -50% 0;
+  width: max-content;
+  max-width: 100%;
+  text-align: center;
+  margin: 0;
+  /* Watermark: tadinya putih transparan di atas gelap, kini tinta gelap
+     transparan di atas terang. */
+  color: color-mix(in srgb, var(--text) 16%, transparent);
+  font-family: var(--font-heading);
+  font-size: clamp(60px, 7.5vw, 94px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
+}
+
+.intro,
+.outro {
+  position: absolute;
+  right: 48px;
+  width: 255px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.intro {
+  top: 48px;
+}
+.outro {
+  bottom: 48px;
+}
+.intro p span,
+.outro p span {
+  color: var(--accent);
+}
+.crosses {
+  display: block;
+  margin-bottom: 12px;
+  color: color-mix(in srgb, var(--muted) 60%, transparent);
+  letter-spacing: 0.5em;
+}
+.annotation {
+  display: block;
+  margin-top: 14px;
+  text-align: right;
+  /* Sebelumnya semi-transparan; terukur kontras 3,27 (ambang AA 4,5). */
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.cards {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 64px;
+  margin-top: 205px;
+  padding-inline: 25px;
+}
+
+.card {
+  --tilt: -10deg;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 310px;
+  margin: 0;
+  padding: 27px 25px 24px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  /* Kartu kertas putih, bukan panel tembus pandang. backdrop-filter dilepas
+     karena tidak ada gunanya di atas latar terang yang hampir solid. */
+  background: linear-gradient(155deg, #fff, #fbfbfa 62%, #f6f7f5);
+  box-shadow:
+    0 18px 32px rgba(15, 23, 42, 0.09),
+    0 2px 6px rgba(15, 23, 42, 0.05);
+  /* --shake terpisah dari --swing: --swing ditulis JS saat kartu di-drag,
+     sedangkan --shake digerakkan animasi hover. Kalau keduanya memakai
+     properti yang sama, animasi hover akan menimpa posisi drag (animasi CSS
+     menang atas inline style), dan kartu jadi lepas dari kursor. */
+  transform: rotate(calc(var(--tilt) + var(--swing, 0deg) + var(--shake, 0deg)));
+  transform-origin: 58% 0;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    animation: shake 0.55s ease-in-out;
+  }
+  /* Saat sedang ditarik, hover tetap aktif — shake harus mengalah. */
+  .card[data-dragging] {
+    animation: none;
+  }
+}
+
+@keyframes shake {
+  0% { --shake: 0deg; }
+  15% { --shake: -2.2deg; }
+  32% { --shake: 1.9deg; }
+  50% { --shake: -1.3deg; }
+  68% { --shake: 0.9deg; }
+  85% { --shake: -0.4deg; }
+  100% { --shake: 0deg; }
+}
+
+.card:nth-child(2) {
+  --tilt: 7deg;
+  top: 100px;
+  z-index: 2;
+}
+.card:nth-child(3) {
+  --tilt: -5deg;
+  top: 12px;
+}
+.card[data-dragging] {
+  z-index: 3;
+  cursor: grabbing;
+}
+
+.quote {
+  margin: 0;
+  max-width: 96%;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+}
+.caption {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 30px;
+}
+.number {
+  flex-shrink: 0;
+  /* Sebelumnya semi-transparan; terukur kontras 3,0 di latar terang
+     (ambang AA 4,5). Dibuat solid. */
+  color: var(--muted);
+  font-size: 9px;
+}
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 9px;
+  text-align: right;
+}
+.role {
+  color: var(--accent);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+.company {
+  max-width: 210px;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.2vw, 27px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  color: var(--text);
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .card {
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .scene {
+    padding-inline: 32px;
+    min-height: 830px;
+  }
+  .intro,
+  .outro {
+    right: 32px;
+    width: 225px;
+  }
+  .cards {
+    gap: 32px;
+    padding-inline: 0;
+    margin-top: 220px;
+  }
+  .card {
+    --tilt: -4deg;
+    min-height: 335px;
+    padding: 24px 18px;
+  }
+  .card:nth-child(2) {
+    --tilt: 3deg;
+  }
+  .card:nth-child(3) {
+    --tilt: -3deg;
+  }
+  .quote {
+    font-size: 13px;
+  }
+  .headline {
+    left: 50%;
+    top: 150px;
+  }
+}
+
+@media (max-width: 767px) {
+  .scene {
+    min-height: auto;
+    padding: 36px 24px 40px;
+  }
+  .scene::before {
+    left: 5%;
+    width: 90%;
+    height: 620px;
+  }
+  .headline {
+    position: relative;
+    inset: auto;
+    translate: none;
+    width: auto;
+    margin-top: 30px;
+    font-size: clamp(33px, 7.8vw, 60px);
+    color: color-mix(in srgb, var(--text) 20%, transparent);
+  }
+  .intro,
+  .outro {
+    position: relative;
+    inset: auto;
+    width: min(100%, 320px);
+  }
+  .intro {
+    margin-top: 28px;
+  }
+  .intro .crosses {
+    display: none;
+  }
+  .intro .annotation {
+    text-align: left;
+  }
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 52px;
+    max-width: 350px;
+    margin: 56px auto 0;
+    padding-inline: 12px;
+  }
+  .card {
+    --tilt: -4deg;
+    min-height: 285px;
+    padding: 26px;
+  }
+  .card:nth-child(2) {
+    --tilt: 4deg;
+    top: 0;
+  }
+  .card:nth-child(3) {
+    --tilt: -3deg;
+    top: 0;
+  }
+  .quote {
+    font-size: 15px;
+  }
+  .company {
+    font-size: 25px;
+  }
+  .outro {
+    margin: 52px 0 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transform: none;
+  }
+}
