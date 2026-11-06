@@ -1,0 +1,328 @@
+.page { color: var(--text); }
+.container { width: 100%; max-width: 76rem; margin-inline: auto; padding-inline: 2.5rem; }
+.label, .itemNumber { color: var(--muted); font-family: var(--font-technical); font-size: .6875rem; line-height: 1.6; letter-spacing: .12em; text-transform: uppercase; }
+.page :is(a, button, label[for], input[type="range"], input[type="checkbox"]) { cursor: pointer; }
+.page :is(a, button, input):focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+.page :is(button, input) { font: inherit; }
+.page button { transition: background 160ms, border-color 160ms, color 160ms, transform 160ms; }
+.page button:active { transform: translateY(1px); }
+.hero { position: relative; padding-top: 9rem; }
+.heroInner { position: relative; }
+.heroGrid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); align-items: center; gap: 3.5rem; }
+.heroCopy { min-width: 0; }
+.hero h1 { margin-top: 1.5rem; font-family: var(--font-heading); font-size: clamp(3rem,4.9vw,4.5rem); font-weight: 400; line-height: 1.04; letter-spacing: -.055em; }
+.hero h1 > span { color: var(--accent); }
+.lead { max-width: 30rem; margin-top: 1.75rem; color: var(--muted); font-size: 1.0625rem; line-height: 1.75; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1.5rem; margin-top: 2rem; }
+.primary { display: inline-flex; justify-content: center; align-items: center; gap: 1rem; min-height: 48px; padding: .875rem 1.25rem; border: 1px solid var(--accent); border-radius: 6px; background: var(--accent); color: white; font-size: .875rem; line-height: 1.5; transition: background 160ms, transform 160ms; }
+.primary:hover { background: var(--accent-hover); }
+.primary:active { transform: translateY(1px); }
+.textLink { display: inline-flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 44px; color: var(--accent); font-size: .875rem; line-height: 1.5; text-underline-offset: 4px; }
+.textLink:hover { text-decoration: underline; }
+.textLink:active { opacity: .75; }
+.heroVisual { min-width: 0; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-soft); box-shadow: 0 20px 48px -30px rgba(30,58,138,.3); }
+.visualTop { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+.visualTop > svg { flex-shrink: 0; color: var(--accent); }
+.visualTag { color: var(--accent); font-family: var(--font-technical); font-size: .625rem; line-height: 1.6; text-transform: uppercase; }
+.networkScene { padding: 1.5rem; }
+.networkInputs { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .75rem; }
+.networkInputs > div { display: grid; justify-items: center; gap: .625rem; padding: 1rem .5rem; border: 1px solid var(--border); border-radius: 6px; background: white; color: var(--accent); }
+.networkInputs span { color: var(--text); font-size: .75rem; }
+.networkConnector { display: flex; justify-content: space-around; width: 70%; height: 27px; margin-inline: auto; }
+.networkConnector > span { width: 1px; height: 100%; background: #8293bd; }
+.hubCore { position: relative; z-index: 1; padding: 1.5rem; border: 1px solid rgba(30,58,138,.4); border-radius: 8px; background: white; box-shadow: 0 12px 25px -20px rgba(30,58,138,.5); }
+.hubCore > div:first-child { display: flex; align-items: center; gap: .75rem; color: var(--accent); font-size: .8125rem; }
+.hubCore > strong { display: block; margin-top: 1.25rem; font-family: var(--font-heading); font-size: 1.75rem; font-weight: 400; line-height: 1.15; letter-spacing: -.04em; }
+.hubCore > p { margin-top: .625rem; color: var(--muted); font-size: .8125rem; line-height: 1.7; }
+.hubFields { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+.hubFields > span { padding: .5rem .625rem; border: 1px solid var(--border); border-radius: 3px; background: var(--surface-soft); color: var(--accent); font-size: .625rem; }
+.networkBranch { width: 55%; height: 25px; margin-inline: auto; border-inline: 1px solid #8293bd; }
+.networkOutputs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.networkOutputs > div { display: flex; align-items: center; gap: .75rem; padding: .875rem 1rem; border: 1px solid rgba(30,58,138,.25); border-radius: 6px; background: var(--accent-soft); color: var(--accent); font-size: .75rem; line-height: 1.5; }
+.networkOutputs svg { flex-shrink: 0; }
+.networkOutputs strong { font-weight: 400; }
+.heroVisual figcaption { padding: 1.125rem 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .6875rem; line-height: 1.6; }
+.chapterNav { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); margin-top: 3.5rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.chapterNav a { display: flex; align-items: center; gap: 1rem; min-height: 72px; padding: 1rem 1.25rem; font-size: .875rem; transition: background 160ms, color 160ms; }
+.chapterNav a + a { border-left: 1px solid var(--border); }
+.chapterNav a > span { color: var(--muted); font-family: var(--font-technical); font-size: .625rem; }
+.chapterNav svg { flex-shrink: 0; margin-left: auto; color: var(--accent); }
+.chapterNav a:hover { background: var(--accent-soft); color: var(--accent); }
+.chapterNav a:hover > span { color: var(--accent); }
+.chapterNav a:active { background: white; }
+.section { padding-block: 6rem; scroll-margin-top: 5.5rem; }
+.tinted { background: var(--surface-soft); }
+.sectionHeading { display: flex; align-items: flex-end; justify-content: space-between; gap: 3rem; margin-bottom: 3rem; }
+.sectionHeading h2 { margin-top: 1.25rem; font-family: var(--font-heading); font-size: var(--type-section-title); font-weight: 400; line-height: 1.08; letter-spacing: -.045em; }
+.sectionHeading h2 > span { color: var(--muted); }
+.sectionHeading > p { max-width: 21rem; color: var(--muted); font-size: .875rem; line-height: 1.75; }
+.scaleOptions { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .75rem; }
+.scaleOptions button { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 1rem; min-height: 168px; padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; background: white; text-align: left; }
+.scaleOptions button > span:first-child { display: flex; align-items: baseline; gap: .5rem; width: 100%; }
+.scaleOptions strong { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 400; line-height: 1; letter-spacing: -.045em; }
+.scaleOptions small { color: var(--muted); font-size: .6875rem; }
+.scaleOptions button > span:nth-child(2) { flex: 1; font-size: .8125rem; line-height: 1.6; }
+.scaleOptions svg { flex-shrink: 0; margin-top: .2rem; color: var(--accent); }
+.scaleOptions button:is(:hover,[aria-pressed="true"]) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.scaleOptions button:is(:hover,[aria-pressed="true"]) small { color: var(--accent); }
+.scaleDetail { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.05fr); gap: 3rem; align-items: center; margin-top: 1.5rem; padding: 2.5rem; border: 1px solid var(--border); border-radius: 12px; background: white; }
+.scaleCopy h3 { margin-top: 1rem; font-family: var(--font-heading); font-size: 2rem; font-weight: 400; line-height: 1.15; letter-spacing: -.04em; }
+.scaleCopy > p { margin-top: 1rem; color: var(--muted); font-size: .9375rem; line-height: 1.8; }
+.scaleVisual { min-width: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft); animation: scene-enter 240ms ease-out both; }
+.scaleVisual .visualTop { padding: 1rem 1.25rem; }
+.scaleVisual .label { font-size: .5625rem; }
+.workRows { display: grid; gap: .75rem; padding: 1.25rem; }
+.workRows > div { display: flex; align-items: center; gap: .75rem; padding: .75rem; border: 1px solid var(--border); border-radius: 6px; background: white; font-size: .8125rem; line-height: 1.6; }
+.workRows .itemNumber { font-size: .625rem; }
+.workRows svg { flex-shrink: 0; margin-left: auto; color: var(--accent); }
+.scaleFocus { display: flex; align-items: center; gap: .75rem; padding: 1rem 1.25rem; border-top: 1px solid var(--border); color: var(--accent); font-size: .8125rem; line-height: 1.6; }
+.scaleFocus svg { flex-shrink: 0; }
+.scaleNote { margin-top: 1.25rem; color: var(--muted); font-size: .75rem; line-height: 1.8; }
+.payoutWorkspace { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); border: 1px solid var(--border); border-radius: 12px; background: var(--surface-soft); }
+.payoutControls { min-width: 0; padding: 2rem; }
+.payoutControlsTop { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.resetButton { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; padding: .5rem .25rem; color: var(--accent); font-size: .75rem !important; white-space: nowrap; text-underline-offset: 4px; }
+.resetButton:hover { text-decoration: underline; }
+.controlGroup { margin-top: 1.75rem; }
+.controlGroup > label:first-child { display: block; margin-bottom: .75rem; font-size: .9375rem; line-height: 1.6; }
+.numberInput { display: flex; align-items: center; gap: .75rem; min-width: 0; padding: .375rem 1rem; border: 1px solid var(--muted); border-radius: 6px; background: white; }
+.numberInput > span { color: var(--muted); font-size: .875rem; }
+.numberInput input { min-width: 0; width: 100%; height: 44px; color: var(--text); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.numberInput:focus-within { border-color: var(--accent); }
+.numberInput:has(input[aria-invalid="true"]) { border-color: var(--text); border-style: dashed; }
+.percentInput { max-width: 12rem; }
+.controlHelp, .inputError { margin-top: .625rem; color: var(--muted); font-size: .75rem; line-height: 1.7; }
+.inputError { padding-left: .75rem; border-left: 2px solid var(--text); color: var(--text); }
+.rangeLabel { display: block; width: fit-content; margin-top: .75rem; color: var(--muted); font-size: .6875rem; }
+.range { display: block; width: 100%; height: 44px; margin-top: .25rem; accent-color: var(--accent); }
+.rangeEnds { display: flex; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: .6875rem; }
+.taxOption { display: flex; align-items: center; gap: 1rem; min-height: 88px; margin-top: 1.75rem; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; }
+.taxOption input { flex-shrink: 0; width: 24px; height: 24px; accent-color: var(--accent); }
+.taxOption strong { display: block; font-size: .8125rem; font-weight: 400; line-height: 1.6; }
+.taxOption small { display: block; margin-top: .3rem; color: var(--muted); font-size: .6875rem; line-height: 1.7; }
+.taxOption:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.taxOption:has(input:checked) small { color: var(--accent); }
+.receipt { min-width: 0; margin: 2rem 2rem 2rem 0; padding: 2rem; border: 1px solid var(--border); border-radius: 8px; background: white; }
+.receiptTop { display: flex; align-items: center; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--border); }
+.receiptTop > svg { flex-shrink: 0; color: var(--accent); }
+.receiptTop h3 { margin-top: .375rem; font-family: var(--font-heading); font-size: 1.625rem; font-weight: 400; line-height: 1.2; letter-spacing: -.035em; }
+.receiptScenario { margin-top: 1.25rem; color: var(--muted); font-size: .6875rem; line-height: 1.6; }
+.receiptRows { display: grid; gap: 1.5rem; margin-block: 1.75rem; }
+.receiptRows > div { display: flex; justify-content: space-between; gap: 1.25rem; }
+.receiptRows dt { font-size: .8125rem; line-height: 1.6; }
+.receiptRows small { display: block; margin-top: .3rem; color: var(--muted); font-size: .6875rem; }
+.receiptRows dd { font-size: .875rem; line-height: 1.6; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.netResult { padding: 1.5rem; border: 1px solid rgba(30,58,138,.3); border-radius: 8px; background: var(--accent-soft); }
+.netResult .label { color: var(--accent); }
+.netResult output { display: block; margin-top: .875rem; color: var(--accent); font-family: var(--font-heading); font-size: clamp(1.75rem,2.6vw,2.625rem); font-weight: 400; line-height: 1.1; letter-spacing: -.045em; white-space: nowrap; }
+.netResult p { margin-top: .875rem; font-size: .6875rem; line-height: 1.8; }
+.receiptFlow { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; color: var(--muted); font-size: .625rem; line-height: 1.6; }
+.receiptFlow svg { color: var(--accent); }
+.receiptEmpty { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; padding-block: 2rem; text-align: center; }
+.receiptEmpty svg { color: var(--accent); }
+.receiptEmpty h4 { margin-top: 1rem; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 400; line-height: 1.25; letter-spacing: -.03em; }
+.receiptEmpty p { margin-top: 1rem; color: var(--muted); font-size: .875rem; line-height: 1.8; }
+.payoutNote { grid-column: 1/-1; padding: 1.5rem 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .75rem; line-height: 1.8; }
+.blue { background: var(--accent); color: white; }
+.blue .label, .blue .itemNumber, .blue .sectionHeading > p, .blue .sectionHeading h2 > span { color: #dbe4ff; }
+.blue :is(a, button):focus-visible { outline-color: white; }
+.infrastructureExplorer { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: start; gap: 4rem; }
+.infrastructureItem { border-bottom: 1px solid #91a6db; }
+.infrastructureItem:first-child { border-top: 1px solid #91a6db; }
+.infrastructureItem button { display: flex; align-items: center; gap: 1rem; width: 100%; min-height: 80px; padding: 1.25rem .25rem; text-align: left; }
+.infrastructureItem button > span:nth-child(2) { flex: 1; font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.3; letter-spacing: -.025em; }
+.infrastructureItem button > svg { flex-shrink: 0; }
+.infrastructureItem button:hover { background: rgba(255,255,255,.06); }
+.infrastructureItem button[aria-expanded="true"] > span:nth-child(2) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.featureBody { padding: 0 1.75rem 1.5rem 2.5rem; color: #e2e8fa; font-size: .9375rem; line-height: 1.8; }
+.featureBody .textLink { margin-top: .75rem; color: white; }
+.infrastructureCanvas { min-width: 0; border: 1px solid #91a6db; border-radius: 12px; background: var(--surface-soft); color: var(--text); }
+.infrastructureCanvas :is(.label,.itemNumber) { color: var(--muted); }
+.infrastructureScene { display: flex; flex-direction: column; justify-content: center; min-height: 370px; padding: 2rem; animation: scene-enter 240ms ease-out both; }
+.infrastructureCaption { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; border-top: 1px solid var(--border); }
+.infrastructureCaption p { color: var(--muted); font-size: .8125rem; line-height: 1.7; }
+.infrastructureCaption > span { flex-shrink: 0; white-space: nowrap; }
+.previewCore { display: grid; justify-items: center; gap: .75rem; color: var(--accent); text-align: center; }
+.previewCore > strong { font-family: var(--font-heading); font-size: 1.625rem; font-weight: 400; line-height: 1.2; letter-spacing: -.035em; }
+.previewCore > span { color: var(--muted); font-size: .75rem; line-height: 1.7; }
+.trackingCells { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .75rem; margin-top: 2rem; }
+.trackingCells > span { display: flex; align-items: center; gap: .625rem; padding: .875rem; border: 1px solid var(--border); border-radius: 6px; background: white; font-size: .8125rem; }
+.trackingCells svg { color: var(--accent); }
+.previewArrow { display: block; margin: 1.25rem auto; color: var(--accent); }
+.nicheCards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .75rem; }
+.nicheCards > span { display: block; padding: 1.25rem .75rem; border: 1px solid var(--border); border-radius: 6px; background: white; color: var(--muted); font-size: .75rem; line-height: 1.8; text-align: center; }
+.nicheCards strong { color: var(--text); font-weight: 400; }
+.signalRows { display: grid; gap: .75rem; margin-top: 1.75rem; }
+.signalRows > span { display: flex; align-items: center; gap: .75rem; padding: .875rem; border: 1px solid var(--border); border-radius: 6px; background: white; font-size: .8125rem; }
+.signalRows svg { flex-shrink: 0; color: var(--accent); }
+.signalRows > span > span { margin-left: auto; color: var(--muted); font-size: .625rem; }
+.payoutSteps { display: grid; gap: .75rem; margin-top: 1.75rem; }
+.payoutSteps li { display: flex; align-items: center; gap: .75rem; padding: .875rem; border: 1px solid var(--border); border-radius: 6px; background: white; font-size: .8125rem; }
+.payoutSteps li > span { color: var(--accent); font-family: var(--font-technical); font-size: .625rem; }
+.payoutSteps svg { margin-left: auto; color: var(--accent); }
+.tierVisual { display: grid; justify-items: center; gap: 1.25rem; color: var(--accent); text-align: center; }
+.tierVisual > strong { font-family: var(--font-heading); font-size: 1.625rem; font-weight: 400; line-height: 1.2; letter-spacing: -.035em; }
+.tierCards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .625rem; width: 100%; }
+.tierCards > div { padding: 1.25rem .625rem; border: 1px solid var(--border); border-radius: 6px; background: white; }
+.tierCards > div > span { display: flex; align-items: flex-end; justify-content: center; gap: 4px; min-height: 40px; }
+.tierCards > div > span > span { width: 10px; height: 24px; border-radius: 2px; background: var(--accent); }
+.tierCards > div:nth-child(2) > span > span { height: 32px; }
+.tierCards > div:nth-child(3) > span > span { height: 40px; }
+.tierCards strong { display: block; margin-top: 1rem; font-size: .8125rem; font-weight: 400; }
+.tierVisual > p { color: var(--muted); font-size: .75rem; line-height: 1.8; }
+.insightLanes { display: grid; gap: .75rem; margin-top: 1.75rem; }
+.insightLanes > span { display: flex; align-items: center; gap: .75rem; padding: 1rem; border: 1px solid var(--border); border-radius: 6px; background: white; font-size: .8125rem; }
+.insightLanes svg { color: var(--accent); }
+.cta { position: relative; padding-block: 6rem 7rem; text-align: center; }
+.ctaInner { position: relative; display: flex; flex-direction: column; align-items: center; }
+.ctaIcon { margin-bottom: 1.5rem; color: var(--accent); }
+.cta h2 { margin-top: 1.5rem; font-family: var(--font-heading); font-size: clamp(2.5rem,4.3vw,4rem); font-weight: 400; line-height: 1.08; letter-spacing: -.05em; }
+.cta h2 > span { color: var(--accent); }
+.ctaInner > p:not(.label) { max-width: 30rem; margin-top: 1.5rem; color: var(--muted); font-size: 1rem; line-height: 1.8; }
+.cta .primary { margin-top: 2rem; }
+@keyframes scene-enter { from { transform: translateY(5px); } to { transform: translateY(0); } }
+@media (max-width: 1100px) {
+  .heroGrid { gap: 2rem; }
+  .hero h1 { font-size: clamp(3rem,5.2vw,4rem); }
+  .networkScene { padding: 1.25rem; }
+  .networkInputs { gap: .625rem; }
+  .networkOutputs { gap: .75rem; }
+  .networkOutputs > div { padding-inline: .75rem; gap: .5rem; }
+  .scaleOptions button { padding: 1.25rem; }
+  .scaleDetail { gap: 2rem; padding: 2rem; }
+  .payoutControls { padding: 1.5rem; }
+  .receipt { margin: 1.5rem 1.5rem 1.5rem 0; padding: 1.5rem; }
+  .netResult { padding: 1.25rem; }
+  .infrastructureExplorer { gap: 2.5rem; }
+  .infrastructureScene { padding: 1.5rem; }
+}
+@media (max-width: 950px) {
+  .heroGrid { grid-template-columns: minmax(0,1fr) minmax(0,1.05fr); gap: 1.75rem; }
+  .hero h1 { font-size: 3rem; }
+  .lead { font-size: 1rem; }
+  .visualTop { padding: 1rem 1.25rem; }
+  .heroVisual .label { font-size: .5625rem; }
+  .networkInputs span { font-size: .6875rem; }
+  .hubCore { padding: 1.25rem; }
+  .hubCore > strong { font-size: 1.625rem; }
+  .sectionHeading { gap: 2rem; }
+  .sectionHeading > p { max-width: 17rem; }
+  .scaleOptions { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .scaleOptions button { min-height: 140px; }
+  .scaleDetail { gap: 1.75rem; }
+  .payoutWorkspace { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  .payoutControlsTop { align-items: flex-start; flex-direction: column; gap: .25rem; }
+  .receiptRows > div { gap: 1rem; }
+  .receiptRows dd { font-size: .8125rem; }
+  .receiptTop { gap: .75rem; }
+  .receiptTop h3 { font-size: 1.5rem; }
+  .netResult { padding: 1rem; }
+  .netResult output { font-size: 1.875rem; }
+  .receiptFlow { justify-content: flex-start; }
+  .infrastructureExplorer { gap: 2rem; }
+  .infrastructureItem button { gap: .75rem; }
+  .infrastructureItem button > span:nth-child(2) { font-size: 1.375rem; }
+  .trackingCells { gap: .5rem; }
+  .trackingCells > span { padding: .75rem; font-size: .75rem; }
+}
+@media (max-width: 760px) {
+  .container { padding-inline: 1.25rem; }
+  .hero { padding-top: 7.25rem; }
+  .heroGrid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero h1 { font-size: clamp(2.75rem,7.8vw,4rem); }
+  .lead { max-width: 34rem; margin-top: 1.5rem; }
+  .heroVisual { width: 100%; max-width: 33rem; margin-inline: auto; }
+  .heroVisual .label { font-size: .625rem; }
+  .networkScene { padding: 1.5rem; }
+  .networkInputs { gap: .75rem; }
+  .networkInputs span { font-size: .75rem; }
+  .chapterNav { margin-top: 2.5rem; }
+  .chapterNav a { gap: .625rem; padding-inline: .75rem; font-size: .75rem; }
+  .section { padding-block: 4rem; }
+  .sectionHeading { flex-direction: column; align-items: flex-start; gap: 1.25rem; margin-bottom: 2rem; }
+  .sectionHeading h2 { margin-top: 1rem; }
+  .sectionHeading > p { max-width: 32rem; }
+  .scaleDetail { grid-template-columns: 1fr; padding: 1.75rem; }
+  .scaleCopy h3 { font-size: 1.875rem; }
+  .payoutWorkspace { grid-template-columns: 1fr; }
+  .payoutControls { padding: 1.75rem; }
+  .payoutControlsTop { flex-direction: row; align-items: center; }
+  .receipt { margin: 0 1.75rem 1.75rem; padding: 1.75rem; }
+  .netResult output { font-size: clamp(2rem,5.5vw,2.75rem); }
+  .receiptRows dd { font-size: .9375rem; }
+  .receiptFlow { justify-content: space-between; }
+  .payoutNote { padding: 1.5rem 1.75rem; }
+  .infrastructureExplorer { grid-template-columns: 1fr; gap: 2rem; }
+  .infrastructureCanvas { grid-row: 1; }
+  .infrastructureScene { min-height: 340px; }
+  .infrastructureItem button > span:nth-child(2) { font-size: 1.5rem; }
+  .cta { padding-block: 4rem 5rem; }
+}
+@media (max-width: 540px) {
+  .chapterNav { grid-template-columns: 1fr; }
+  .chapterNav a { min-height: 56px; padding-inline: .25rem; font-size: .8125rem; }
+  .chapterNav a + a { border-left: 0; border-top: 1px solid var(--border); }
+  .scaleOptions { gap: .625rem; }
+  .scaleOptions button { padding: 1rem; gap: .75rem; }
+  .scaleOptions strong { font-size: 2rem; }
+  .scaleOptions small { font-size: .625rem; }
+  .scaleDetail { padding: 1.25rem; gap: 1.5rem; }
+  .payoutControls { padding: 1.25rem; }
+  .payoutControlsTop { gap: .75rem; }
+  .payoutControlsTop > .label { max-width: 10rem; }
+  .receipt { margin: 0 1rem 1.25rem; padding: 1.25rem; }
+  .receiptTop h3 { font-size: 1.5rem; }
+  .receiptRows { gap: 1.25rem; }
+  .receiptRows dd { font-size: .8125rem; }
+  .netResult output { font-size: clamp(1.75rem,7vw,2.5rem); }
+  .payoutNote { padding: 1.25rem; }
+  .taxOption { padding: .875rem; }
+  .infrastructureScene { padding: 1.5rem; }
+  .infrastructureCaption { padding: 1rem 1.25rem; }
+  .featureBody { padding-left: 2rem; padding-right: .25rem; }
+}
+@media (max-width: 370px) {
+  .container { padding-inline: 1rem; }
+  .hero h1 { font-size: 2.625rem; }
+  .label { font-size: .625rem; }
+  .heroVisual .label { font-size: .5rem; }
+  .visualTop { padding-inline: 1rem; }
+  .networkScene { padding: 1rem; }
+  .networkInputs { gap: .5rem; }
+  .networkInputs > div { padding: .875rem .375rem; }
+  .networkInputs span { font-size: .6875rem; }
+  .hubCore { padding: 1rem; }
+  .hubFields { gap: .375rem; }
+  .hubFields > span { padding-inline: .5rem; }
+  .networkOutputs { gap: .5rem; }
+  .networkOutputs > div { padding: .75rem .5rem; font-size: .6875rem; }
+  .networkOutputs svg { width: 20px; }
+  .scaleOptions button { padding: .875rem; }
+  .scaleOptions button > span:first-child { gap: .375rem; }
+  .scaleOptions strong { font-size: 1.875rem; }
+  .scaleOptions button > span:nth-child(2) { font-size: .75rem; }
+  .workRows { padding: 1rem; }
+  .workRows > div { gap: .5rem; font-size: .75rem; }
+  .scaleFocus { padding-inline: 1rem; font-size: .75rem; }
+  .payoutControlsTop { align-items: flex-start; flex-direction: column; gap: .25rem; }
+  .payoutControlsTop > .label { max-width: none; }
+  .receipt { padding: 1rem; }
+  .receiptTop { gap: .625rem; }
+  .receiptTop h3 { font-size: 1.375rem; }
+  .receiptRows > div { gap: .75rem; }
+  .receiptRows dt { font-size: .75rem; }
+  .receiptRows dd { font-size: .75rem; }
+  .receiptRows small { font-size: .625rem; }
+  .netResult { padding: 1rem .875rem; }
+  .netResult output { font-size: 1.625rem; }
+  .infrastructureScene { padding: 1.25rem; }
+  .infrastructureItem button > span:nth-child(2) { font-size: 1.25rem; }
+  .trackingCells > span { padding: .625rem; gap: .375rem; font-size: .6875rem; }
+  .signalRows > span { gap: .5rem; padding: .75rem; font-size: .75rem; }
+  .tierCards { gap: .5rem; }
+  .tierCards > div { padding-inline: .5rem; }
+  .tierCards strong { font-size: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::before, .page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

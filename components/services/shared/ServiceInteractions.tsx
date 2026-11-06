@@ -7,7 +7,7 @@ import styles from "./ServicePage.module.css";
 export type ServiceFeature = { title: string; body: string; tag: string; icon: "sparkles" | "trend" | "layers" | "shield" | "database" | "workflow"; sample: string };
 const icons = { sparkles: Sparkles, trend: TrendingUp, layers: Layers3, shield: ShieldCheck, database: Database, workflow: Workflow };
 
-export function FeatureExplorer({ id, features }: { id: string; features: ServiceFeature[] }) {
+export function FeatureExplorer({ id, features, canvasLabel = "Built for real operations" }: { id: string; features: ServiceFeature[]; canvasLabel?: string }) {
   const [selected, setSelected] = useState(0);
   const [expanded, setExpanded] = useState<number | null>(0);
   const feature = features[selected];
@@ -17,7 +17,7 @@ export function FeatureExplorer({ id, features }: { id: string; features: Servic
       <h3><button type="button" id={`${id}-button-${i}`} aria-expanded={expanded === i} aria-controls={`${id}-content-${i}`} onClick={() => { setSelected(i); setExpanded(expanded === i ? null : i); }}><span className={styles.eyebrow}>0{i + 1}</span>{item.title}<ChevronRight size={16} aria-hidden="true" /></button></h3>
       <div id={`${id}-content-${i}`} role="region" aria-labelledby={`${id}-button-${i}`} hidden={expanded !== i} className={styles.featureBody}><p>{item.body}</p></div>
     </div>)}</div>
-    <div className={styles.featureCanvas} aria-hidden="true"><span className={styles.eyebrow}>Built for real operations</span><div key={selected} className={styles.featureIllustration}><span className={styles.orbit} /><span className={styles.orbit} /><span className={styles.featureCore}><Icon size={40} strokeWidth={1.25} /></span><span className={styles.orbitPoint} /></div><div key={`caption-${selected}`} className={styles.visualCaption}><span className={styles.eyebrow}>{feature.tag}</span><p>{feature.sample}</p></div><span className={styles.featureCounter}>0{selected + 1} / 0{features.length}</span></div>
+    <div className={styles.featureCanvas} aria-hidden="true"><span className={styles.eyebrow}>{canvasLabel}</span><div key={selected} className={styles.featureIllustration}><span className={styles.orbit} /><span className={styles.orbit} /><span className={styles.featureCore}><Icon size={40} strokeWidth={1.25} /></span><span className={styles.orbitPoint} /></div><div key={`caption-${selected}`} className={styles.visualCaption}><span className={styles.eyebrow}>{feature.tag}</span><p>{feature.sample}</p></div><span className={styles.featureCounter}>0{selected + 1} / 0{features.length}</span></div>
   </div>;
 }
 

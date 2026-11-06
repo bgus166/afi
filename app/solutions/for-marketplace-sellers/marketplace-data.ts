@@ -1,0 +1,50 @@
+export const channelComparison = [
+  { aspect: "Peran utama", marketplace: "Mengenalkan produk dan menjangkau pelanggan baru.", d2c: "Membangun pengalaman repeat order dan retensi." },
+  { aspect: "Sumber traffic", marketplace: "Pencarian dan rekomendasi dari algoritma platform.", d2c: "Afiliator D2C serta database pelanggan brand." },
+  { aspect: "Aset brand", marketplace: "Eksposur produk melalui etalase marketplace.", d2c: "Website, pengalaman belanja, dan data pelanggan di channel brand." },
+  { aspect: "Hubungan pembeli", marketplace: "Interaksi berlangsung di dalam platform marketplace.", d2c: "Hubungan langsung antara pelanggan dan brand." },
+  { aspect: "Struktur biaya", marketplace: "Mengikuti program, komisi, subsidi, dan iklan platform.", d2c: "Dirancang sesuai program afiliasi dan kebutuhan channel sendiri." },
+] as const;
+
+export const expansionPhases = [
+  {
+    title: "Foundation",
+    period: "Bulan 1",
+    heading: "Siapkan rumah untuk channel baru.",
+    body: "Bangun website D2C dan integrasikan pelacakan afiliasi AfiHub. Mulai dengan mengundang 20–30 afiliator terbaik dari jaringan yang sudah kamu punya.",
+    focus: ["Website D2C", "Tracking afiliasi AfiHub", "20–30 afiliator awal"],
+    target: null,
+    targetPercent: null,
+    services: [],
+  },
+  {
+    title: "Activation",
+    period: "Bulan 2–3",
+    heading: "Aktifkan percakapan dan kontennya.",
+    body: "Jalankan AfiAssist untuk menjawab FAQ di website selama 24/7. Gunakan AfiCreator untuk membagikan brief konten harian kepada afiliator D2C.",
+    focus: ["FAQ website 24/7", "Brief harian afiliator", "Aktivasi channel D2C"],
+    target: "10–15%",
+    targetPercent: 15,
+    services: [{ name: "AfiAssist", href: "/services/afiassist" }, { name: "AfiCreator", href: "/services/aficreator" }],
+  },
+  {
+    title: "Growth",
+    period: "Bulan 4–6",
+    heading: "Beri pelanggan alasan untuk kembali.",
+    body: "Tinjau ruang subsidi ongkir D2C dari efisiensi biaya channel. Aktifkan program loyalitas agar pelanggan punya alasan untuk melakukan repeat order langsung ke brand.",
+    focus: ["Subsidi ongkir D2C", "Program loyalitas", "Pengalaman repeat order"],
+    target: "25–30%",
+    targetPercent: 30,
+    services: [],
+  },
+  {
+    title: "Scale",
+    period: "Bulan 7–12",
+    heading: "Hubungkan data dan operasionalnya.",
+    body: "Gunakan AfiInsight untuk meninjau traffic iklan antar-channel. Hubungkan alur stok gudang dan invoicing melalui AfiFlow agar operasional mendukung pertumbuhan portofolio.",
+    focus: ["Analisis traffic antar-channel", "Alur stok gudang", "Invoice terhubung"],
+    target: "40%+",
+    targetPercent: 40,
+    services: [{ name: "AfiInsight", href: "/services/afiinsight" }, { name: "AfiFlow", href: "/services/afiflow" }],
+  },
+] as const;

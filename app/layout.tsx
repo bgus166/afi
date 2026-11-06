@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Onest, Syne, IBM_Plex_Mono } from "next/font/google";
+import { Onest, Raleway, IBM_Plex_Mono } from "next/font/google";
 import { site } from "@/lib/site";
 import { buildOrganizationGraph } from "@/lib/jsonld";
 import { AfiChatDock } from "@/components/chat/AfiChatDock";
@@ -11,8 +11,8 @@ const onest = Onest({
   display: "swap",
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const raleway = Raleway({
+  variable: "--font-raleway",
   subsets: ["latin"],
   display: "swap",
 });
@@ -66,12 +66,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     // Variabel font dipasang di <html>, bukan <body>. Token --font-heading
-    // dkk. dideklarasikan di :root dan merujuk var(--font-syne); kalau
+    // dkk. dideklarasikan di :root dan merujuk var(--font-raleway); kalau
     // variabel font-nya baru ada di <body>, substitusi di :root menghasilkan
     // nilai kosong — dan kekosongan itu yang diwariskan ke seluruh halaman.
     <html
       lang={site.lang}
-      className={`${onest.variable} ${syne.variable} ${plexMono.variable}`}
+      className={`${onest.variable} ${raleway.variable} ${plexMono.variable}`}
     >
       <body className="antialiased">
         {children}

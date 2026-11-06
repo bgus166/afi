@@ -15,6 +15,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${site.url}/case-studies`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${site.url}/pricing`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${site.url}/about`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${site.url}/solutions/for-d2c-brands`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${site.url}/solutions/for-marketplace-sellers`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${site.url}/solutions/for-affiliate-brands`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${site.url}/services/afiassist`,
       changeFrequency: "monthly",
       priority: 0.9,

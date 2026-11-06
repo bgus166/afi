@@ -41,7 +41,7 @@
      `font-[family-name:var(--font-heading)]` resolve ke kosong, dan seluruh
      situs diam-diam jatuh ke font sistem. */
   --font-body: var(--font-onest), system-ui, sans-serif;
-  --font-heading: var(--font-syne), var(--font-onest), system-ui, sans-serif;
+  --font-heading: var(--font-raleway), var(--font-onest), system-ui, sans-serif;
   --font-technical: var(--font-plex-mono), ui-monospace, monospace;
 }
 
@@ -59,7 +59,7 @@
   --color-border: var(--border);
 
   --font-body: var(--font-onest), system-ui, sans-serif;
-  --font-heading: var(--font-syne), var(--font-onest), system-ui, sans-serif;
+  --font-heading: var(--font-raleway), var(--font-onest), system-ui, sans-serif;
   --font-technical: var(--font-plex-mono), ui-monospace, monospace;
 
   --shadow-scene: 0 24px 80px rgba(15, 23, 42, 0.08);
@@ -407,8 +407,8 @@ body {
   height: var(--deck-card-height);
   padding: 0.625rem 0.625rem 0.625rem 2.25rem;
   border-radius: 1.5rem;
-  background: var(--deck-color);
-  color: #fff;
+  background: #ececff;
+  color: #20212b;
   transform-origin: 50% 100%;
   z-index: calc(var(--deck-count) - var(--deck-index));
   will-change: transform;
@@ -428,18 +428,11 @@ body {
 }
 
 .deck-card-visual {
-  /* Kartu mewariskan color:#fff ke seluruh isinya. Panel ini berlatar terang,
-     jadi warnanya dikembalikan — tanpa ini teks di dalam visual (mis. "90
-     detik") jadi putih di atas putih dan hilang. */
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  color: #20212b;
   border-radius: 0.875rem;
-  background: var(--background);
-  padding: 1.5rem;
+  background: #fff;
   min-height: 0;
-  overflow: hidden;
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
@@ -457,8 +450,8 @@ body {
 
 @media (max-width: 767px) {
   .deck-track {
-    --deck-card-height: 620px;
-    --deck-stage-top: max(1rem, calc(50svh - 310px));
+    --deck-card-height: 650px;
+    --deck-stage-top: max(5.5rem, calc(50svh - 325px));
   }
   .deck-stage {
     width: calc(100% - 2rem);
@@ -466,13 +459,13 @@ body {
   .deck-card {
     grid-template-columns: 1fr;
     grid-template-rows: auto minmax(0, 1fr);
-    gap: 1.375rem;
+    gap: 3rem;
     padding: 1.5rem 0.625rem 0.625rem;
     border-radius: 1.25rem;
   }
   .deck-card-body {
     padding: 0 0.875rem;
-    gap: 1.125rem;
+    gap: 0.875rem;
   }
 }
 
