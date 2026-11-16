@@ -24,10 +24,10 @@ export function Problem() {
     <section
       id="problem"
       aria-labelledby="problem-title"
-      className="relative z-10 scroll-mt-24 bg-[var(--background)] py-16 md:py-24"
+      className="relative z-10 scroll-mt-24 bg-[var(--accent-soft)] py-16 md:py-24"
     >
       <div className="mx-auto w-full max-w-[72rem] px-6 md:px-10">
-        <p className="section-label">01 / The Problem</p>
+        <p className="section-label text-accent!">01 / The Problem</p>
 
         <h2
           id="problem-title"
@@ -36,7 +36,7 @@ export function Problem() {
         >
           Brand kamu sudah scale.
           <br />
-          <span className="text-[var(--muted)]">
+          <span className="text-[var(--accent)]">
             Tapi operasionalnya belum.
           </span>
         </h2>
@@ -53,7 +53,7 @@ export function Problem() {
               }
             >
               {/* Nomor bersifat dekoratif — urutan sudah tersampaikan lewat <ol> */}
-              <span className="section-label" aria-hidden="true">
+              <span className="section-label text-accent!" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </span>
 
@@ -64,14 +64,14 @@ export function Problem() {
                 {p.title}
               </h3>
 
-              <p className="mt-3 max-w-[32rem] text-[0.9375rem] leading-[1.6] text-[var(--muted)]">
+              <p className="mt-3 max-w-[32rem] text-[0.9375rem] leading-[1.6]">
                 {p.body}
               </p>
             </li>
           ))}
         </ol>
 
-        <p className="reveal mt-12 max-w-[42rem] text-[var(--muted)]" style={{ fontSize: "var(--type-lead)", lineHeight: 1.5 }}>
+        <p className="reveal mt-12 max-w-[42rem]" style={{ fontSize: "var(--type-lead)", lineHeight: 1.5 }}>
           Afilabs solve ketiga masalah ini — dengan AI yang dibangun khusus
           untuk konteks bisnis D2C Indonesia.
         </p>

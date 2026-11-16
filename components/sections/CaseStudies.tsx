@@ -1,5 +1,9 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
+import afiAssistImage from "@/public/images/results/afiassist.png";
+import afiCreatorImage from "@/public/images/results/aficreator.png";
+import afiFlowImage from "@/public/images/results/afiflow.png";
+import afiInsightImage from "@/public/images/results/afiinsight.png";
 import { StackScroll } from "./StackScroll";
 import styles from "./CaseStudies.module.css";
 
@@ -9,7 +13,7 @@ type Case = {
   category: string;
   title: string;
   body: string;
-  image: string;
+  image: StaticImageData;
   mirrored?: boolean;
   metric: "growth" | "response" | "content" | "workflow";
   /**
@@ -27,7 +31,7 @@ const CASES: Case[] = [
     category: "AfiInsight",
     title: "Dari spreadsheet ke sistem afiliasi otomatis",
     body: "Program afiliasi yang dikelola manual digantikan sistem otomatis. 200+ afiliator ter-manage, GMV afiliasi naik 34% dalam 60 hari.",
-    image: "/images/results/afiinsight.png",
+    image: afiInsightImage,
     metric: "growth",
   },
   {
@@ -36,7 +40,7 @@ const CASES: Case[] = [
     category: "AfiAssist",
     title: "Response time turun dari 4 jam ke 90 detik",
     body: "AfiAssist menangani 80% pertanyaan CS. Tim CS kini fokus ke masalah yang benar-benar butuh manusia.",
-    image: "/images/results/afiassist.png",
+    image: afiAssistImage,
     mirrored: true,
     metric: "response",
   },
@@ -46,7 +50,7 @@ const CASES: Case[] = [
     category: "AfiCreator",
     title: "Brief konten untuk ratusan afiliator sekaligus",
     body: "Hook dan caption digenerate otomatis dari USP tiap produk, lalu dikirim sebagai brief personal ke masing-masing afiliator.",
-    image: "/images/results/aficreator.png",
+    image: afiCreatorImage,
     mirrored: true,
     metric: "content",
     isDraft: true,
@@ -57,7 +61,7 @@ const CASES: Case[] = [
     category: "AfiFlow",
     title: "10 jam kerja manual per minggu berjalan sendiri",
     body: "Rekap order, follow-up payment, dan laporan mingguan dijadikan alur otomatis dengan titik persetujuan manusia.",
-    image: "/images/results/afiflow.png",
+    image: afiFlowImage,
     mirrored: true,
     metric: "workflow",
     isDraft: true,
@@ -74,8 +78,6 @@ function CaseVisual({ item }: { item: Case }) {
       <div className={styles.imageFrame}>
         <Image
           src={item.image}
-          width={1122}
-          height={1402}
           alt=""
           sizes="(max-width: 767px) 80vw, (max-width: 1099px) 36vw, 335px"
           className={`${styles.illustration}${item.mirrored ? ` ${styles.mirrored}` : ""}`}
